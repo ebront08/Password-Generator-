@@ -41,16 +41,17 @@ window.addEventListener('load', function () {
   const resultEl = document.getElementById('password');
 
   document.getElementById('generate').addEventListener('click', () => {
-    resultEl.value = generatePassword(
+    /*   resultEl.value = generatePassword(
       clowercase,
       cuppercase,
       cnumbers,
       csymbols,
       plength
-    );
+    ); */
+    resultEl.value = "generatePassword"
   });
 
-  document.getElementById('clipboard').addEventListener('click', () => {
+  document.getElementById('generate').addEventListener('click', () => {
     const textarea = document.createElement('textarea');
     const password = resultEl.value;
 
@@ -60,9 +61,9 @@ window.addEventListener('load', function () {
 
     textarea.value = password;
     document.body.appendChild(textarea);
-    textarea.select();
+    textarea.select(rando);
     document.execCommand('copy');
-    textarea.remove();
+    textarea.remove(rando);
     alert('Password copied to clipboard');
   });
 });
@@ -75,8 +76,9 @@ const randomFunc = {
 };
 
 function generatePassword(lower, upper, number, symbol, length) {
-  let generatedPassword = '';
+  
   const typesCount = lower + upper + number + symbol;
+  console.log(typesCount)
   const typesArr = [
     {
       lower,
@@ -96,6 +98,7 @@ function generatePassword(lower, upper, number, symbol, length) {
   for (let i = 0; i < length; i += typesCount) {
     typesArr.forEach((type) => {
       const funcName = Object.keys(type)[0];
+      //console.log(typesArr)
       generatedPassword += randomFunc[funcName]();
     });
   }
@@ -105,19 +108,26 @@ function generatePassword(lower, upper, number, symbol, length) {
   return finalPassword;
 }
 
+function rando(characters) {
+  console.log(characters)
+  console.log('characters')
+
+}
+
+//let rando = ('qwertyuiopasdfghjklzxcvbnm')
 // Generator functions
 function getRandomLower() {
-  return rando('qwertyuiopasdfghjklzxcvbnm');
+   rando('qwertyuiopasdfghjklzxcvbnm');
 }
 
 function getRandomUpper() {
-  return rando('QWERTYUIOPASDFGHJKLZXCVBNM');
+   rando('QWERTYUIOPASDFGHJKLZXCVBNM');
 }
 
 function getRandomNumber() {
-  return rando(9);
+   rando(9);
 }
 
 function getRandomSymbol() {
-  return rando('!@#$%^&*(){}[]=<>/,.');
+   rando('!@#$%^&*(){}[]=<>/,.');
 }
